@@ -26,11 +26,13 @@ exports.login = function(req, res, next)
 		return res.status(400).json({ success: false, message: validationResult.message, errors: validationResult.errors });
 
 
-	passport.authenticate('local-login', function(err, token, userData){
+	passport.authenticate('local-login', function(err, token, userData)
+	{
 		if(err)
 		{
 			if(err.name === "CredencialesIncorrectasError")
 				return res.status(400).json({ success: false, message: err.message });
+			console.log(err);
 			return res.status(400).json({ success: false, message: "No se pudo procesar el form" });
 		}
 		return res.json({ success:true, message: "Has podido acceder!", token: token, userData: userData});
@@ -52,20 +54,10 @@ function validateSignupForm(payload)
 		isFormValid = false;
 		errors.password = "La contraseña necesita ser de minimo 8 caracteres";
 	}
-	if(!payload.name || payload.name.trim().length === 0)
+	if(!payload.nombre || payload.nombre.trim().length === 0)
 	{
 		isFormValid = false;
-		errors.name = "Falta el nombre";
-	}
-	if(!payload.semestre || payload.semestre.trim().length === 0)
-	{
-		isFormValid = false;
-		errors.semestre = "Falta el semestre";
-	}
-	if(!payload.carrera || payload.carrera.trim().length === 0)
-	{
-		isFormValid = false;
-		errors.carrera = "Falta la carrera";
+		errors.nombre = "Falta el nombre";
 	}
 	if(!isFormValid)
 	{

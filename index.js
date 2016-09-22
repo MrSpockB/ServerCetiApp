@@ -1,10 +1,10 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var config = require('./app/config/config'),
-	mongoose = require('./app/config/mongoose'),
+	bookshelf = require('./app/config/bookshelf'),
 	express = require('./app/config/express');
 
-var db = mongoose(),
+var db = bookshelf(),
 	app = express();
 
 app.listen(config.port);

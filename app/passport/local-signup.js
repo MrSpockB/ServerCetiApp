@@ -1,4 +1,4 @@
-var User = require('mongoose').model('User'),
+var User = require('./../models/user'),
 	passportLocalStrategy = require('passport-local').Strategy;
 
 
@@ -16,15 +16,19 @@ module.exports = function(config)
 		{
 			email: email.trim(),
 			password: password.trim(),
-			name: req.body.name.trim(),
-			semestre: req.body.semestre.trim(),
-			carrera: req.body.carrera.trim(),
+			nombre: req.body.nombre.trim(),
 		};
-		var newUser = new User(userData);
-		newUser.save(function(err){
-			if(err)
-				return done(err);
-			return done(null);
-		})
+		new User(userData)
+			.save()
+			.then(function(user)
+			{
+				done(null);
+			})
+			.catch(function(err)
+			{
+				console.log(err);
+				done(err);
+			});
+		
 	});
 };

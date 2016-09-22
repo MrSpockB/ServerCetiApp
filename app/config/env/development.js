@@ -2,6 +2,10 @@ var port = 5000;
 
 module.exports = {
     port: port,
-    db: 'mongodb://127.0.0.1/ServerApp',
+    host: "127.0.0.1",
+    user: "root",
+    password: "",
+    database: "cetiApp",
+    charser: "utf8",
     jwtSecret: "NodeManagementSystem",
 };

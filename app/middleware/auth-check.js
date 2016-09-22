@@ -1,5 +1,5 @@
 var jwt = require('jsonwebtoken'),
-	User = require('mongoose').model('User');
+	User = require('./../models/user');
 
 	module.exports = function(config)
 	{
@@ -17,12 +17,17 @@ var jwt = require('jsonwebtoken'),
 				if(err)
 					return res.status(401).end();
 				var userId = decoded.sub;
-				User.findById(userId, function(err, user)
+				User.forge({id: userId})
+				.fetch()
+				.then(function(user)
 				{
-					if (err || !user) {
+					if (!user) {
 						return res.status(401).end();
 					}
 					return next();
+				})
+				.catch(function(err){
+					return res.status(401).end();
 				});
 			});
 		};

@@ -1,35 +1,35 @@
-var mongoose = require('mongoose'),
-	bcrypt = require('bcrypt-nodejs'),
-	Schema = mongoose.Schema;
+var bookshelf = require('./../config/bookshelf')();
+var when = require('when');
+var bcrypt = require("bcrypt-nodejs");
 
-var userSchema = new Schema({
-	name: String,
-	email: { type: String, index: { unique: true }},
-	password: String,
-	semestre: Number,
-	carrera: String,
-});
-
-userSchema.methods.comparePassword = function(password, callback)
-{
-	bcrypt.compare(password, this.password, callback);
-}
-userSchema.pre('save', function(next){
-	var user = this;
-	if(!user.isModified('password'))
-		return next();
-
-	bcrypt.genSalt(10, function(err, salt){
-		if(err)
-			return next(err);
-		
-		bcrypt.hash(user.password, salt, null, function(err, hash){
-			if(err)
-				return next(err);
-			user.password = hash;
-			return next();
+var Usuario = bookshelf.Model.extend({
+	tableName: 'usuarios',
+	initialize: function()
+	{
+		this.on('creating', this.hashPassword, this);
+	},
+	comparePassword: function(pass, cb)
+	{
+		bcrypt.compare(pass, this.get('password'), cb);
+	},
+	hashPassword: function(model, attrs, options){
+		return when.promise(function(resolve, reject, notify){
+			bcrypt.genSalt(10, function(err, salt)
+			{
+				if(err)
+					return reject(err);
+				bcrypt.hash(model.attributes.password, salt, null, function(err,hash)
+				{
+					if(err)
+						reject(err);
+					model.set('password', hash);
+					resolve(hash);
+				});
+			});
 		});
-	});
+	}
 });
 
-mongoose.model('User', userSchema);
+
+
+module.exports = Usuario;

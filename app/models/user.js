@@ -1,9 +1,20 @@
-var bookshelf = require('./../config/bookshelf')();
+var bookshelf = require('./../config/bookshelf');
+var ModelBase = require('bookshelf-modelbase')(bookshelf);
+require('./rol');
+require('./grupo');
 var when = require('when');
 var bcrypt = require("bcrypt-nodejs");
 
-var Usuario = bookshelf.Model.extend({
+var Usuario = ModelBase.extend({
 	tableName: 'usuarios',
+	rol: function()
+	{
+		return this.belongsTo('Rol', 'rol_id');
+	},
+	grupos: function()
+	{
+		return this.belongsToMany('Grupo', 'grupo_usuario', 'usuario_id');
+	},
 	initialize: function()
 	{
 		this.on('creating', this.hashPassword, this);
@@ -32,4 +43,4 @@ var Usuario = bookshelf.Model.extend({
 
 
 
-module.exports = Usuario;
+module.exports = bookshelf.model('Usuario', Usuario);

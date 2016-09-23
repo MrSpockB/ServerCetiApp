@@ -25,7 +25,7 @@ module.exports = function()
 	
 	require('./../passport')(passport);
 	require('../routes/auth')(app);
-	apiRouter.use(authMiddleware);
+	//apiRouter.use(authMiddleware);
 	switchyard(apiRouter, __dirname+'/./../controllers');
 	app.use('/', apiRouter);
 	

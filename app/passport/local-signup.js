@@ -17,6 +17,7 @@ module.exports = function(config)
 			email: email.trim(),
 			password: password.trim(),
 			nombre: req.body.nombre.trim(),
+			rol_id: req.body.rol_id
 		};
 		new User(userData)
 			.save()

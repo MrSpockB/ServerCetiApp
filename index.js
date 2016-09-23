@@ -4,8 +4,7 @@ var config = require('./app/config/config'),
 	bookshelf = require('./app/config/bookshelf'),
 	express = require('./app/config/express');
 
-var db = bookshelf(),
-	app = express();
+var app = express();
 
 app.listen(config.port);
 

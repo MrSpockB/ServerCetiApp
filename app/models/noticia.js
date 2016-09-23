@@ -1,7 +1,11 @@
-var bookshelf = require('./../config/bookshelf')();
+var bookshelf = require('./../config/bookshelf');
 
 var Noticia = bookshelf.Model.extend({
-	tableName: 'noticias'
+	tableName: 'noticias',
+	grupos: function()
+	{
+		return this.belongsToMany('Grupo', 'grupo_noticia', 'noticia_id');
+	}
 });
 
-module.exports = Noticia;
+module.exports = bookshelf.model('Noticia', Noticia);

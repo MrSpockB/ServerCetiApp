@@ -9,6 +9,11 @@ var Schema =
 		imagenSrc: {type: 'string', maxlength: 250, nullable: true}
 
 	},
+	roles:
+	{
+		id: {type: 'increments', nullable: false, primary: true},
+		nombre: {type: 'string', maxlength: 150, nullable: false}
+	},
 	usuarios:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
@@ -16,11 +21,6 @@ var Schema =
 		nombre: {type: 'string', maxlength: 150, nullable: false},
 		password: {type: 'string', nullable: false},
 		rol_id: {type: 'integer', nullable: false, unsigned: true, references: 'roles.id'}
-	},
-	roles:
-	{
-		id: {type: 'increments', nullable: false, primary: true},
-		nombre: {type: 'string', maxlength: 150, nullable: false}
 	},
 	grupos:
 	{

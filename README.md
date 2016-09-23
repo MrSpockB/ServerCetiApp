@@ -20,9 +20,13 @@ Instrucciones
 
 > node migrate.js
 
- - Opcional: Si se esta trabajando en un ambiente Unix ejecutar en la terminal
+ - Si se esta trabajando en un ambiente Unix ejecutar en la terminal
  
 >export NODE_ENV=development
+
+ - Si se esta trabajando en Windows, ejecutar
+  
+>set NODE_ENV=development
 
  - Ejecutar el servidor con
  

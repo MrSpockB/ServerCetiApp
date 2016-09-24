@@ -26,5 +26,19 @@ module.exports = {
 					res.json(err);
 				});
 		}
+	},
+	"view/:noticiaID":
+	{
+		get: function(req, res, next)
+		{
+			Noticia.forge({ id: req.params.noticiaID })
+			.fetch()
+			.then(function(noticia){
+				res.json(noticia);
+			})
+			.catch(function(err){
+				res.json(err);
+			})
+		}
 	}
 };

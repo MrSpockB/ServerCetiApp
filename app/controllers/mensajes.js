@@ -26,7 +26,7 @@ module.exports = {
 	 		}).catch(function(err){
 	 			res.json(err);
 			})
-	 	},
+	 	}
 
 	}
 };

@@ -1,11 +1,11 @@
 var bookshelf = require('./../config/bookshelf');
-var ModelBase = require('bookshelf-modelbase')(bookshelf);
+//var ModelBase = require('bookshelf-modelbase')(bookshelf);
 require('./rol');
 require('./grupo');
 var when = require('when');
 var bcrypt = require("bcrypt-nodejs");
 
-var Usuario = ModelBase.extend({
+var Usuario = bookshelf.Model.extend({
 	tableName: 'usuarios',
 	rol: function()
 	{

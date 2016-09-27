@@ -6,11 +6,15 @@ var Conversacion = bookshelf.Model.extend({
 	tableName: 'conversaciones',
 	usuario: function()
 	{
-		return this.belongsTo('User', 'usuario_id');
+		return this.belongsTo('Usuario', 'usuario_id');
 	},
 	grupo: function()
 	{
 		return this.belongsTo('Grupo', 'grupo_id');
+	},
+	mensajes: function()
+	{
+		return this.hasMany('Mensaje', 'conversacion_id');
 	}
 });
 

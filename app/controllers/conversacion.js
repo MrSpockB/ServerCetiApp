@@ -17,7 +17,11 @@ module.exports = {
 	 },
 	"grupo/:id":{
 		get: function(req, res, next){
-			 Conversacion.query('where', 'grupo_id', '=', req.params.id).fetchAll().then(function(conver){
+			 Conversacion.query('where', 'grupo_id', '=', req.params.id).fetchAll({ 
+        withRelated: [ 
+          'grupo', 'usuario', 'mensajes' 
+        ] 
+      }).then(function(conver){
 	 			res.json(conver);
 	 		}).catch(function(err){
 	 			res.json(err);
@@ -26,7 +30,9 @@ module.exports = {
 	},
 	"user/:id":{
 		get: function(req, res, next){
-			 Conversacion.query('where', 'usuario_id', '=', req.params.id).fetchAll().then(function(conver){
+			 Conversacion.query('where', 'usuario_id', '=', req.params.id).fetchAll({withRelated: [ 
+          'grupo', 'usuario', 'mensajes' 
+        ] }).then(function(conver){
 	 			res.json(conver);
 	 		}).catch(function(err){
 	 			res.json(err);

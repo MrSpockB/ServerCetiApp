@@ -50,7 +50,7 @@ module.exports = {
 			})
 		}
 	  },
-	  	"view/:usuarioID":
+	"view/:usuarioID":
 	{
 		delete: function(req, res, next)
 		{
@@ -65,5 +65,43 @@ module.exports = {
 				res.json(err);
 			})
 		}
-	  }
+	},
+	":usuarioID/grupos":
+	{
+		get: function(req, res, next)
+		{
+			new Usuario({id: req.params.usuarioID})
+			.fetch({
+				withRelated: [
+					'grupos'
+				]
+			})
+			.then(function(usuario){
+				console.log(usuario);
+				res.json(usuario);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
+	":usuarioID/noticias":
+	{
+		get: function(req, res, next)
+		{
+			new Usuario({id: req.params.usuarioID})
+			.fetch({
+				withRelated: [
+					'grupos'
+				]
+			})
+			.then(function(usuario){
+				console.log(usuario);
+				res.json(usuario);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	}
 };

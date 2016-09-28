@@ -19,7 +19,7 @@ module.exports = {
 		get: function(req, res, next){
 			 Conversacion.query('where', 'grupo_id', '=', req.params.id).fetchAll({ 
         withRelated: [ 
-          'grupo', 'usuario', 'mensajes' 
+          'grupo', 'usuario' 
         ] 
       }).then(function(conver){
 	 			res.json(conver);
@@ -31,7 +31,7 @@ module.exports = {
 	"user/:id":{
 		get: function(req, res, next){
 			 Conversacion.query('where', 'usuario_id', '=', req.params.id).fetchAll({withRelated: [ 
-          'grupo', 'usuario', 'mensajes' 
+          'grupo', 'usuario'
         ] }).then(function(conver){
 	 			res.json(conver);
 	 		}).catch(function(err){

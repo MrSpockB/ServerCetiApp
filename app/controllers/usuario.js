@@ -77,7 +77,6 @@ module.exports = {
 				]
 			})
 			.then(function(usuario){
-				console.log(usuario);
 				res.json(usuario);
 			})
 			.catch(function(err){
@@ -96,7 +95,6 @@ module.exports = {
 				]
 			})
 			.then(function(usuario){
-				console.log(usuario);
 				res.json(usuario);
 			})
 			.catch(function(err){

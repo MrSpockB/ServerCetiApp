@@ -31,7 +31,21 @@ module.exports = {
 		get: function(req, res, next)
 		{
 			Grupo.forge({ id: req.params.grupoID })
-			.fetch()
+			.fetch({withRelated:['usuarios']})
+			.then(function(grupo){
+				res.json(grupo);
+			})
+			.catch(function(err){
+				res.json(err);
+			})
+		}
+	},
+	"news/:grupoID":
+	{
+		get: function(req, res, next)
+		{
+			Grupo.forge({ id: req.params.grupoID })
+			.fetch({withRelated:['noticias']})
 			.then(function(grupo){
 				res.json(grupo);
 			})

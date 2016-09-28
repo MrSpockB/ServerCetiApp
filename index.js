@@ -37,6 +37,6 @@ io.on('connection', function(socket){
 
 console.log(process.env.NODE_ENV  + ' server running at http://localhost:' + config.port);
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname +'/hello.html');
+app.get('/chat', function(req, res){
+  res.sendFile(__dirname +'/chat.html');
 });

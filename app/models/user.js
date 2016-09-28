@@ -7,6 +7,7 @@ var bcrypt = require("bcrypt-nodejs");
 
 var Usuario = bookshelf.Model.extend({
 	tableName: 'usuarios',
+	visible: ['id','nombre', 'grupos'],
 	rol: function()
 	{
 		return this.belongsTo('Rol', 'rol_id');

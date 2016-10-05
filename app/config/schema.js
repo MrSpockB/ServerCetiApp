@@ -7,7 +7,6 @@ var Schema =
 		texto: {type: 'string', maxlength: 250, nullable: false},
 		fecha: {type: 'dateTime', nullable: false},
 		imagenSrc: {type: 'string', maxlength: 250, nullable: true}
-
 	},
 	roles:
 	{
@@ -26,7 +25,9 @@ var Schema =
 	{
 		id: {type: 'increments', nullable: false, primary: true},
 		nombre: {type: 'string', maxlength: 150, nullable: false},
-		semestre: {type: 'integer', nullable: false, unsigned: true}
+		semestre: {type: 'integer', nullable: false, unsigned: true},
+		nivel: {type: 'string', maxlength: 50, nullable: false},
+		carrera: {type: 'string', maxlength: 150, nullable: false}
 	},
 	grupo_usuario:
 	{

@@ -29,6 +29,11 @@ var Schema =
 		nivel: {type: 'string', maxlength: 50, nullable: false},
 		carrera: {type: 'string', maxlength: 150, nullable: false}
 	},
+	conversaciones:
+	{
+		id: {type: 'increments', nullable: false, primary: true},
+		nombre: {type: 'string', maxlength: 150, nullable: false},
+	},
 	grupo_usuario:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
@@ -41,12 +46,12 @@ var Schema =
 		grupo_id: {type: 'integer', nullable: false, unsigned: true, references: 'grupos.id'},
 		noticia_id: {type: 'integer', nullable: false, unsigned: true, references: 'noticias.id'}
 	},
-	conversaciones:
+	conversacion_usuario:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
-		grupo_id: {type: 'integer', nullable: false, unsigned: true, references: 'grupos.id'},
-		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
-	},
+		conversacion_id: {type: 'integer', nullable: false, unsigned: true, references: 'conversaciones.id'},
+		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuario.id'}
+	}
 	mensaje:
 	{
 		id: {type: 'increments', nullable: false, primary: true},

@@ -51,7 +51,7 @@ var Schema =
 		id: {type: 'increments', nullable: false, primary: true},
 		conversacion_id: {type: 'integer', nullable: false, unsigned: true, references: 'conversaciones.id'},
 		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuario.id'}
-	}
+	},
 	mensaje:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
@@ -59,6 +59,19 @@ var Schema =
 		fecha: {type: 'dateTime', nullable: false},
 		conversacion_id: {type: 'integer', nullable: false, unsigned: true, references: 'conversaciones.id'},
 		remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
-	}
+	},
+	materia:
+	{
+		id: {type: 'increments', nullable: false, primary: true},
+		codigo: {type: 'string', maxlength: 250, nullable: false},
+		nombre: {type: 'string', maxlength: 250, nullable: false},
+		nivel: {type: 'string', maxlength: 250, nullable: false}
+	},
+	grupo_materia:
+	{
+		id: {type: 'increments', nullable: false, primary: true},
+		grupo_id: {type: 'integer', nullable: false, unsigned: true, references: 'grupo.id'},
+		materia_id: {type: 'integer', nullable: false, unsigned: true, references: 'materia.id'}
+	},
 };
 module.exports = Schema;

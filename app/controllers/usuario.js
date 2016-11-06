@@ -138,5 +138,23 @@ module.exports = {
 				res.json(err);
 			});
 		}
+	},
+	"conversaciones":
+	{
+		get: function(req, res, next)
+		{
+			var noticias = [];
+			console.log(res.userID);
+			new Usuario({id: res.userID})
+			.fetch({withRelated: ['conversaciones']})
+			.then(function(usuario)
+			{
+				var conversaciones = usuario.related('conversaciones');
+				res.json(conversaciones);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
 	}
 };

@@ -7,7 +7,7 @@ var bcrypt = require("bcrypt-nodejs");
 
 var Usuario = bookshelf.Model.extend({
 	tableName: 'usuarios',
-	visible: ['id','nombre', 'grupos'],
+	visible: ['id','nombre', 'grupos', 'conversaciones'],
 	rol: function()
 	{
 		return this.belongsTo('Rol', 'rol_id');
@@ -15,6 +15,10 @@ var Usuario = bookshelf.Model.extend({
 	grupos: function()
 	{
 		return this.belongsToMany('Grupo', 'grupo_usuario', 'usuario_id');
+	},
+	conversaciones: function()
+	{
+		return this.belongsToMany('Conversacion', 'conversacion_usuario', 'usuario_id', 'conversacion_id');
 	},
 	initialize: function()
 	{

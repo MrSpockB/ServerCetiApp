@@ -38,7 +38,26 @@ module.exports = {
 	 			res.json(err);
 			})
 	 	}
-	}
+	},
+	":conversacionID/mensajes":
+	{
+		get: function(req, res, next)
+		{
+			new Conversacion({id: req.params.conversacionID})
+			.fetch({
+				withRelated: [
+					'mensajes'
+				]
+			})
+			.then(function(conversacion){
+				var mensajes = conversacion.related('mensajes');
+				res.json(mensajes);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
 
 	
 };

@@ -8,6 +8,7 @@ module.exports = {
 	 		new Mensajes({
 	 			conversacion_id: req.body.idConversacion,
 	 			texto: req.body.texto,
+	 			fecha: req.body.fecha,
 	 			remitente_id: req.body.idremitente
 	 		}).save().then(function(mensaje){
 	 			res.json(mensaje);

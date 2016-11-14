@@ -6,7 +6,8 @@ var Schema =
 		titulo: {type: 'string', maxlength: 150, nullable: false},
 		texto: {type: 'string', maxlength: 250, nullable: false},
 		fecha: {type: 'dateTime', nullable: false},
-		imagenSrc: {type: 'string', maxlength: 250, nullable: true}
+		imagenSrc: {type: 'string', maxlength: 250, nullable: true},
+		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},
 	roles:
 	{
@@ -27,7 +28,9 @@ var Schema =
 		nombre: {type: 'string', maxlength: 150, nullable: false},
 		semestre: {type: 'integer', nullable: false, unsigned: true},
 		nivel: {type: 'string', maxlength: 50, nullable: false},
-		carrera: {type: 'string', maxlength: 150, nullable: false}
+		carrera_division: {type: 'string', maxlength: 150, nullable: false},
+		tipo: {type: 'string', maxlength: 50, nullable: false},
+		turno: {type: 'string', maxlength: 50, nullable: false},
 	},
 	conversaciones:
 	{

@@ -1,4 +1,5 @@
 var Noticia = require('./../models/noticia');
+var Grupo = require('./../models/grupo');
 
 module.exports = {
 	index: 

@@ -124,7 +124,7 @@ module.exports = {
 			var noticias = [];
 			console.log(res.userID);
 			new Usuario({id: res.userID})
-			.fetch({withRelated: ['grupos.noticias']})
+			.fetch({withRelated: ['grupos.noticias.usuario']})
 			.then(function(usuario)
 			{
 				var grupos = usuario.related('grupos');

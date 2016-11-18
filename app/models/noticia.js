@@ -5,6 +5,10 @@ var Noticia = bookshelf.Model.extend({
 	grupos: function()
 	{
 		return this.belongsToMany('Grupo', 'grupo_noticia', 'noticia_id');
+	},
+	usuario: function()
+	{
+		return this.belongsTo('Usuario', 'usuario_id');
 	}
 });
 

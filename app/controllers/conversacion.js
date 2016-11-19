@@ -6,9 +6,12 @@ module.exports = {
 
 	 	post: function(req, res, next){
 	 		new Conversacion({
-	 			grupo_id: req.body.idGrupo,
-	 			usuario_id: req.body.idUser
+	 			nombre: req.body.nombre,
+	 			tipo: req.body.tipo
 	 		}).save().then(function(mensaje){
+
+				  return mensaje.usuarios().attach([req.body.usuarioID, req.body.usuario2ID]);
+
 	 			res.json(mensaje);
 	 		}).catch(function(err){
 	 			res.json(err);
@@ -58,6 +61,23 @@ module.exports = {
 			});
 		}
 	},
-
+	":conversacionID/:usuarioID":
+	{
+		get: function(req, res, next)
+		{
+			new Conversacion({id: req.params.conversacionID})
+			.fetch({
+				withRelated: [
+					'usuarios'
+				]
+			})
+			.then(function(conversacion){
+				res.json(mensajes);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
 	
 };

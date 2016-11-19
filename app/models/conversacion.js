@@ -4,9 +4,9 @@ require('./grupo');
 
 var Conversacion = bookshelf.Model.extend({
 	tableName: 'conversaciones',
-	usuario: function()
+	usuarios: function()
 	{
-		return this.belongsTo('Usuario', 'usuario_id');
+		return this.belongsToMany('Usuario', 'conversacion_usuario', 'conversacion_id', 'usuario_id');
 	},
 	grupo: function()
 	{

@@ -144,9 +144,8 @@ module.exports = {
 		get: function(req, res, next)
 		{
 			var noticias = [];
-			console.log(res.userID);
 			new Usuario({id: res.userID})
-			.fetch({withRelated: ['conversaciones']})
+			.fetch({withRelated: ['conversaciones.usuarios']})
 			.then(function(usuario)
 			{
 				var conversaciones = usuario.related('conversaciones');

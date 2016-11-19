@@ -47,7 +47,8 @@ module.exports = function(config)
 					var userData = {
 						id: user.get('id'),
 						nombre: user.get('nombre'), 
-						activo: user.get('activo')
+						activo: user.get('activo'),
+						rol_id: user.get('rol_id')
 					};
 					return done(null, token, userData);
 				})

@@ -124,14 +124,18 @@ module.exports = {
 			var noticias = [];
 			console.log(res.userID);
 			new Usuario({id: res.userID})
-			.fetch({withRelated: ['grupos.noticias']})
+			.fetch({withRelated: ['grupos.noticias.usuario']})
 			.then(function(usuario)
 			{
 				var grupos = usuario.related('grupos');
 				grupos.forEach(function(grupo)
 				{
-					noticias = noticias.concat(grupo.related('noticias').toJSON())
+					noticias = noticias.concat(grupo.related('noticias').orderBy('fecha').toJSON())
 				});
+				noticias.sort(function(noticia1, noticia2){
+					return new Date(noticia2.fecha) - new Date(noticia1.fecha);
+				});
+				console.log(noticias);
 				res.json(noticias);
 			})
 			.catch(function(err){

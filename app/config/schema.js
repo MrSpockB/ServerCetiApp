@@ -1,13 +1,5 @@
 var Schema = 
 {
-	noticias:
-	{
-		id: {type: 'increments', nullable: false, primary: true},
-		titulo: {type: 'string', maxlength: 150, nullable: false},
-		texto: {type: 'string', maxlength: 250, nullable: false},
-		fecha: {type: 'dateTime', nullable: false},
-		imagenSrc: {type: 'string', maxlength: 250, nullable: true}
-	},
 	roles:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
@@ -21,13 +13,24 @@ var Schema =
 		password: {type: 'string', nullable: false},
 		rol_id: {type: 'integer', nullable: false, unsigned: true, references: 'roles.id'}
 	},
+	noticias:
+	{
+		id: {type: 'increments', nullable: false, primary: true},
+		titulo: {type: 'string', maxlength: 150, nullable: false},
+		texto: {type: 'string', maxlength: 250, nullable: false},
+		fecha: {type: 'dateTime', nullable: false},
+		imagenSrc: {type: 'string', maxlength: 250, nullable: true},
+		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
+	},
 	grupos:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
 		nombre: {type: 'string', maxlength: 150, nullable: false},
 		semestre: {type: 'integer', nullable: false, unsigned: true},
 		nivel: {type: 'string', maxlength: 50, nullable: false},
-		carrera: {type: 'string', maxlength: 150, nullable: false}
+		carrera_division: {type: 'string', maxlength: 150, nullable: false},
+		tipo: {type: 'string', maxlength: 50, nullable: false},
+		turno: {type: 'string', maxlength: 50, nullable: false},
 	},
 	conversaciones:
 	{

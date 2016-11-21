@@ -46,7 +46,9 @@ module.exports = function(config)
 					var token = jwt.sign(payload, config.jwtSecret);
 					var userData = {
 						id: user.get('id'),
-						nombre: user.get('nombre')
+						nombre: user.get('nombre'), 
+						activo: user.get('activo'),
+						rol_id: user.get('rol_id')
 					};
 					return done(null, token, userData);
 				})

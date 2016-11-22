@@ -9,6 +9,10 @@ var Noticia = bookshelf.Model.extend({
 	usuario: function()
 	{
 		return this.belongsTo('Usuario', 'usuario_id');
+	},
+	comentarios: function()
+	{
+		return this.hasMany('Comentario', 'noticia_id');
 	}
 });
 

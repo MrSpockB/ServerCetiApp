@@ -67,7 +67,7 @@ module.exports = {
 		get: function(req, res, next)
 		{
 			Noticia.forge({ id: req.params.noticiaID })
-			.fetch()
+			.fetch({withRelated: ['usuario', 'comentarios.usuario']})
 			.then(function(noticia){
 				res.json(noticia);
 			})

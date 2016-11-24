@@ -19,6 +19,7 @@ module.exports = function(config)
 			email: email.trim(),
 			password: password.trim()
 		};
+		console.log(userData);
 		User.forge({email: userData.email})
 			.fetch()
 			.then(function(user)
@@ -44,7 +45,10 @@ module.exports = function(config)
 					};
 					var token = jwt.sign(payload, config.jwtSecret);
 					var userData = {
-						nombre: user.get('nombre')
+						id: user.get('id'),
+						nombre: user.get('nombre'), 
+						activo: user.get('activo'),
+						rol_id: user.get('rol_id')
 					};
 					return done(null, token, userData);
 				})

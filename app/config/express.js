@@ -8,12 +8,19 @@ var config = require('./config'),
 module.exports = function()
 {
 	var app = express();
+	var server = app.listen(config.socketPort)
+	var io = require('socket.io')(server);
 	var apiRouter = express.Router();
 	var authMiddleware = require('./../middleware/auth-check')(config);
 
 	app.use(bodyParser.urlencoded({ extended: true }));
 	app.use(bodyParser.json());
 	app.use(passport.initialize());
+
+	app.use(function (req, res, next){
+		console.log(req.method, req.originalUrl);
+		next();
+	})
 
 	app.use(function(req, res, next)
 	{
@@ -25,7 +32,8 @@ module.exports = function()
 	
 	require('./../passport')(passport);
 	require('../routes/auth')(app);
-	//apiRouter.use(authMiddleware);
+	require('../controllers/realTimeMessaging')(io);
+	apiRouter.use(authMiddleware);
 	switchyard(apiRouter, __dirname+'/./../controllers');
 	app.use('/', apiRouter);
 	

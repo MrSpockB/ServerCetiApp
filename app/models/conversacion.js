@@ -4,13 +4,17 @@ require('./grupo');
 
 var Conversacion = bookshelf.Model.extend({
 	tableName: 'conversaciones',
-	usuario: function()
+	usuarios: function()
 	{
-		return this.belongsTo('User', 'usuario_id');
+		return this.belongsToMany('Usuario', 'conversacion_usuario', 'conversacion_id', 'usuario_id');
 	},
 	grupo: function()
 	{
 		return this.belongsTo('Grupo', 'grupo_id');
+	},
+	mensajes: function()
+	{
+		return this.hasMany('Mensaje', 'conversacion_id');
 	}
 });
 

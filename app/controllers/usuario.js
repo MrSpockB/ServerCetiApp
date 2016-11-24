@@ -1,4 +1,5 @@
 var Usuario = require('./../models/user');
+var Grupo = require('./../models/grupo');
 
 module.exports = {
 	index: 
@@ -26,10 +27,8 @@ module.exports = {
 					res.json(err);
 				});
 		}
-
-	
 	},
-		"view/:usuarioID":
+	"view/:usuarioID":
 	{
 		put: function(req, res, next)
 		{
@@ -48,10 +47,7 @@ module.exports = {
 			.catch(function(err){
 				res.json(err);
 			})
-		}
-	  },
-	"view/:usuarioID":
-	{
+		},
 		delete: function(req, res, next)
 		{
 			new Usuario({id: req.params.usuarioID})
@@ -77,7 +73,6 @@ module.exports = {
 				]
 			})
 			.then(function(usuario){
-				console.log(usuario);
 				res.json(usuario);
 			})
 			.catch(function(err){
@@ -96,8 +91,69 @@ module.exports = {
 				]
 			})
 			.then(function(usuario){
-				console.log(usuario);
 				res.json(usuario);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
+	"grupos":
+	{
+		get: function(req, res, next)
+		{
+			console.log(res.userID);
+			new Usuario({id: res.userID})
+			.fetch({
+				withRelated: [
+					'grupos'
+				]
+			})
+			.then(function(usuario){
+				res.json(usuario);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
+	"noticias":
+	{
+		get: function(req, res, next)
+		{
+			var noticias = [];
+			console.log(res.userID);
+			new Usuario({id: res.userID})
+			.fetch({withRelated: ['grupos.noticias.usuario']})
+			.then(function(usuario)
+			{
+				var grupos = usuario.related('grupos');
+				grupos.forEach(function(grupo)
+				{
+					noticias = noticias.concat(grupo.related('noticias').orderBy('fecha').toJSON())
+				});
+				noticias.sort(function(noticia1, noticia2){
+					return new Date(noticia2.fecha) - new Date(noticia1.fecha);
+				});
+				console.log(noticias);
+				res.json(noticias);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
+	"conversaciones":
+	{
+		get: function(req, res, next)
+		{
+			var noticias = [];
+			new Usuario({id: res.userID})
+			.fetch({withRelated: ['conversaciones.usuarios']})
+			.then(function(usuario)
+			{
+				var conversaciones = usuario.related('conversaciones');
+				res.json(conversaciones);
 			})
 			.catch(function(err){
 				res.json(err);

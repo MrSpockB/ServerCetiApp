@@ -21,9 +21,11 @@ var jwt = require('jsonwebtoken'),
 				.fetch()
 				.then(function(user)
 				{
+
 					if (!user) {
 						return res.status(401).end();
 					}
+					res.userID = user.id;
 					return next();
 				})
 				.catch(function(err){

@@ -25,9 +25,10 @@ module.exports = {
 	 		//console.log("mensaje1: " + req.body.id);
 	 		//res.json(req.params);
 	 		var result;
+	 		Mensajes_dummy.push(req.body);
 	 		res.json( Mensajes_dummy );
 	 		console.log("param_id: " + req.params.id + " body_id: " + req.body.id);
-	 		Mensajes_dummy.push(req.body);
+	 		
 	 	}
 
 	 },

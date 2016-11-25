@@ -78,6 +78,23 @@ var Schema =
 		id: {type: 'increments', nullable: false, primary: true},
 		grupo_id: {type: 'integer', nullable: false, unsigned: true, references: 'grupos.id'},
 		materia_id: {type: 'integer', nullable: false, unsigned: true, references: 'materia.id'}
+	},
+	comentarios: 
+	{ 
+	    id: {type: 'increments', nullable: false, primary: true}, 
+	    texto: {type: 'string', maxlength: 250, nullable: false}, 
+	    fecha: {type: 'dateTime', nullable: false}, 
+	    noticia_id: {type: 'integer', nullable: false, unsigned: true, references: 'noticias.id'}, 
+	    remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}, 
+	    comentario_id: {type: 'integer', nullable: false, unsigned: true}, 
+	},
+	invitaciones:
+	{
+        id: {type:"increments",nullable:false,primary:true},
+        user_padre: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
+        user_hijo: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
+	    estatus: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id', default:0},
+
 	}
 };
 module.exports = Schema;

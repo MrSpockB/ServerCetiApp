@@ -1,11 +1,13 @@
 var Usuario = require('./../models/user');
 var Grupo = require('./../models/grupo');
-
+//var nodemailer = require('nodemailer');
+//var xoauth2 = require('xoauth2');
 module.exports = {
 	index: 
 	{
 		get: function(req, res, next)
 		{
+
 			Usuario.fetchAll()
 			.then(function(noticias){
 				res.json(noticias);
@@ -15,6 +17,7 @@ module.exports = {
 		},
 		post: function(req, res, next)
 		{
+
 			new Usuario({
 				email: req.body.email,
 				nombre: req.body.nombre,
@@ -26,6 +29,61 @@ module.exports = {
 				}).catch(function(err){
 					res.json(err);
 				});
+		}
+	},
+	"sendPassword":
+	{
+		post: function(req, res, next)
+		{
+			
+			//console.log("sendPassword");
+			var result;
+			var Mensajes_dummy =[];
+	 		Mensajes_dummy.push({hola:"hello"});
+	 		res.json( Mensajes_dummy );
+	 		console.log("param_id: " + req.params.id + " body_id: " + req.body.id);
+			// listen for token updates (if refreshToken is set)
+			// you probably want to store these to a db
+			/*generator.on('token', function(token){
+			    console.log('New token for %s: %s', token.user, token.accessToken);
+			});
+*/
+			/*// login
+			var transporter = nodemailer.createTransport({
+			    service: 'gmail',
+			    auth: {
+			        xoauth2: xoauth2.createXOAuth2Generator({
+			            user: '{username}',
+			            clientId: '{Client ID}',
+			            clientSecret: '{Client Secret}',
+			            refreshToken: '{refresh-token}',
+			            accessToken: '{cached access token}'
+			        })
+			    }
+			});*/
+
+			/*// create reusable transporter object using the default SMTP transport
+			var transporter = nodemailer.createTransport('smtps://cetiapp.noreply%40gmail.com:cetiapp123456@smtp.gmail.com');
+
+			// setup e-mail data with unicode symbols
+			var mailOptions = {
+			    from: '"CETI Colomos ?" <cetiapp.noreply@gmail.com>', // sender address
+			    to: 'pizana.alfredo@gmail.com', // list of receivers
+			    subject: 'Hello ✔', // Subject line
+			    text: 'Hello world ?', // plaintext body
+			    html: '<b>Hello world ?</b>' // html body
+			};
+
+			// send mail with defined transport object
+			transporter.sendMail(mailOptions, function(error, info){
+			    if(error){
+			        return console.log(error);
+			    }
+			    console.log('Message sent: ' + info.response);
+			});
+*/
+
+
 		}
 	},
 	"view/:usuarioID":

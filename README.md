@@ -18,10 +18,6 @@ Instrucciones
  - Modificar el archivo app/config/env/development.js con los datos del servidor local de MySQL
  - Abrir una terminal, moverse a la carpeta clonada y ejecutar el siguiente comando, creara las tablas definidas en app/config/schema.js
 
-> node migrate.js
-
- - Si se esta trabajando en un ambiente Unix ejecutar en la terminal
- 
 >export NODE_ENV=development
 
  - Si se esta trabajando en Windows, ejecutar
@@ -29,6 +25,12 @@ Instrucciones
 >set NODE_ENV=development
 
  - Ejecutar el servidor con
+
+> node migrate.js
+
+ - Si se esta trabajando en un ambiente Unix ejecutar en la terminal
+ 
+
  
 
 > nodemon index.js

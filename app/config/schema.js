@@ -11,7 +11,10 @@ var Schema =
 		email: {type: 'string', maxlength: 250, nullable: false, unique:true},
 		nombre: {type: 'string', maxlength: 150, nullable: false},
 		password: {type: 'string', nullable: false},
-		rol_id: {type: 'integer', nullable: false, unsigned: true, references: 'roles.id'}
+		rol_id: {type: 'integer', nullable: false, unsigned: true, references: 'roles.id'},
+		authenticated: {type: 'string', maxlength: 20, nullable: false, defaultTo:'pending'},
+		active: {type: 'integer', nullable: false, defaultTo: 1}
+
 	},
 	noticias:
 	{

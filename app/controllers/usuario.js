@@ -1,7 +1,7 @@
 var Usuario = require('./../models/user');
 var Grupo = require('./../models/grupo');
-//var nodemailer = require('nodemailer');
-//var xoauth2 = require('xoauth2');
+var nodemailer = require('nodemailer');
+var xoauth2 = require('xoauth2');
 module.exports = {
 	index: 
 	{
@@ -36,35 +36,20 @@ module.exports = {
 		post: function(req, res, next)
 		{
 			
-			//console.log("sendPassword");
-			var result;
-			var Mensajes_dummy =[];
-	 		Mensajes_dummy.push({hola:"hello"});
-	 		res.json( Mensajes_dummy );
-	 		console.log("param_id: " + req.params.id + " body_id: " + req.body.id);
-			// listen for token updates (if refreshToken is set)
-			// you probably want to store these to a db
-			/*generator.on('token', function(token){
-			    console.log('New token for %s: %s', token.user, token.accessToken);
-			});
-*/
-			/*// login
-			var transporter = nodemailer.createTransport({
+			// login
+			var smtpTransport = nodemailer.createTransport({
 			    service: 'gmail',
 			    auth: {
-			        xoauth2: xoauth2.createXOAuth2Generator({
-			            user: '{username}',
-			            clientId: '{Client ID}',
-			            clientSecret: '{Client Secret}',
-			            refreshToken: '{refresh-token}',
-			            accessToken: '{cached access token}'
+			         xoauth2: xoauth2.createXOAuth2Generator({
+			            user: 'cetiapp.noreply@gmail.com',
+			            clientId: '314304623860-ma9g2ol2490l5cn0cq1lhd8diaaijj5s.apps.googleusercontent.com',
+			            clientSecret: 'Dh4-gGn_WXulFFwi05gzAiRI',
+			            refreshToken: '1/XnddTBoBPiqW05luA_KJacNa3q3W4dhqYQwBq-l9_1Y',
+			            accessToken: 'ya29.Ci-hA0ulP6iV_Drq961zatVEd5wXDIT8RWDu7Xo_YYTuliPtQGm5mN53d6UwtVWzYw'
 			        })
 			    }
-			});*/
-
-			/*// create reusable transporter object using the default SMTP transport
-			var transporter = nodemailer.createTransport('smtps://cetiapp.noreply%40gmail.com:cetiapp123456@smtp.gmail.com');
-
+			});
+			
 			// setup e-mail data with unicode symbols
 			var mailOptions = {
 			    from: '"CETI Colomos ?" <cetiapp.noreply@gmail.com>', // sender address
@@ -75,13 +60,16 @@ module.exports = {
 			};
 
 			// send mail with defined transport object
-			transporter.sendMail(mailOptions, function(error, info){
-			    if(error){
-			        return console.log(error);
-			    }
-			    console.log('Message sent: ' + info.response);
+			smtpTransport.sendMail(mailOptions, function(error, response) {
+			  if (error) {
+			    console.log(error);
+			  } else {
+			    console.log(response);
+			  }
+			  smtpTransport.close();
 			});
-*/
+
+
 
 
 		}

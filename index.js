@@ -8,3 +8,7 @@ var app = express();
 
 app.listen(config.port);
 console.log(process.env.NODE_ENV  + ' server running at http://localhost:' + config.port);
+
+app.get('/chat', function(req, res){
+  res.sendFile(__dirname +'/chat.html');
+});

@@ -1,5 +1,5 @@
 var Mensajes = require('./../models/mensaje');
-
+var Mensajes_dummy =[];
 module.exports = {
 	index: 
 	 {
@@ -17,7 +17,22 @@ module.exports = {
 			})
 	 	}
 	 },
-	
+	 "add_new/:id":
+	 {
+	 	post: function(req, res){
+	 		//Mensajes_dummy.push(req.params);
+	 		//console.log(req.params);
+	 		//
+	 		//console.log("mensaje1: " + req.body.id);
+	 		//res.json(req.params);
+	 		var result;
+	 		Mensajes_dummy.push(req.body);
+	 		res.json( Mensajes_dummy );
+	 		console.log("param_id: " + req.params.id + " body_id: " + req.body.id);
+	 		
+	 	}
+
+	 },
 	"conv/:id":
 	{
 		get: function(req, res, next){

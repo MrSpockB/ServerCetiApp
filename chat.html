@@ -15,6 +15,17 @@
     
   </head>
   <body>
+    <!-- Lista de Usuarios -->
+    <div>
+      <ul>
+
+      </ul>
+    </div>
+    
+    <!-- Lista de converaciones -->
+    <div>
+      
+    </div>
     <ul id="messages">
       
     </ul>
@@ -32,6 +43,12 @@
       });
       socket.on('chat message', function(msg){
         $('#messages').append($('<li>').text(msg));
+      });
+      $( document ).ready(function() {
+          console.log( "ready!" );
+
+          var Users = Usuario.index();
+          console.log(Users);
       });
     </script>
   </body>

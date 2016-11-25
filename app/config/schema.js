@@ -75,6 +75,14 @@ var Schema =
 		id: {type: 'increments', nullable: false, primary: true},
 		grupo_id: {type: 'integer', nullable: false, unsigned: true, references: 'grupos.id'},
 		materia_id: {type: 'integer', nullable: false, unsigned: true, references: 'materia.id'}
+	},
+	invitaciones:
+	{
+        id: {type:"increments",nullable:false,primary:true},
+        user_padre: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
+        user_hijo: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
+	    estatus: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id', default:0},
+
 	}
 };
 module.exports = Schema;

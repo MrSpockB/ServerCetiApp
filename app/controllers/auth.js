@@ -39,7 +39,7 @@ exports.login = function(req, res, next)
 	})(req, res, next);
 }
 
-export.requestCode = function(req, res, next){
+exports.requestCode = function(req, res, next){
 
 	//Put the code for validation email
 

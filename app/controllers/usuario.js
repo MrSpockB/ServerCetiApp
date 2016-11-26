@@ -31,11 +31,17 @@ module.exports = {
 				});
 		}
 	},
-	"sendPassword":
+	"sendActivationCode":
 	{
 		post: function(req, res, next)
 		{
-			
+			//console.log(("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4));
+			console.log("sendActivationCode");
+			console.log(req.body);
+
+			//req.body.password
+
+
 			// login
 			var smtpTransport = nodemailer.createTransport({
 			    service: 'gmail',
@@ -49,7 +55,10 @@ module.exports = {
 			        })
 			    }
 			});
-			
+
+
+
+
 			// setup e-mail data with unicode symbols
 			var mailOptions = {
 			    from: '"CETI Colomos ?" <cetiapp.noreply@gmail.com>', // sender address
@@ -59,15 +68,17 @@ module.exports = {
 			    html: '<b>Hello world ?</b>' // html body
 			};
 
+
+
 			// send mail with defined transport object
-			smtpTransport.sendMail(mailOptions, function(error, response) {
+			/*smtpTransport.sendMail(mailOptions, function(error, response) {
 			  if (error) {
 			    console.log(error);
 			  } else {
 			    console.log(response);
 			  }
 			  smtpTransport.close();
-			});
+			});*/
 
 
 

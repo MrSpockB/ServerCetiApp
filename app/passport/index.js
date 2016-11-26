@@ -7,4 +7,7 @@ module.exports = function(passport)
 	
 	passport.use('local-signup', localSignupStrategy);
 	passport.use('local-login', localLoginStrategy);
+
+
+
 };

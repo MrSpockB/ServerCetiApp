@@ -14,6 +14,7 @@ module.exports = function(config)
 	},
 	function(req, email, password, done) 
 	{
+		console.log("local-login.js");
 		var userData = 
 		{
 			email: email.trim(),
@@ -44,7 +45,7 @@ module.exports = function(config)
 						sub: user.id,
 					};
 					var token = jwt.sign(payload, config.jwtSecret);
-					var userDatos = {
+					var data = {
 						id: user.get('id'),
 						nombre: user.get('nombre'), 
 						activo: user.get('activo'),
@@ -52,7 +53,8 @@ module.exports = function(config)
 						authenticated: user.get('authenticated'),
 						active: user.get('active')
 					};
-					return done(null, token, userDatos);
+					console.log(data);
+					return done(null, token, data);
 				})
 			})
 			.catch(function (err){

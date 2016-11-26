@@ -39,6 +39,33 @@ exports.login = function(req, res, next)
 	})(req, res, next);
 }
 
+export.requestCode = function(req, res, next){
+
+	//Put the code for validation email
+
+
+	var validationResult = {
+		success: true,
+		message: 'Email Correcto',
+		errors: ''
+	};
+	//
+	if(!validationResult.success)
+		return res.status(400).json({ success: false, message: validationResult.message, errors: validationResult.errors });
+
+	/*passport.authenticate('local-request-code', function(err, token, userData)
+	{
+		if(err)
+		{
+			if(err.name === "CredencialesIncorrectasError")
+				return res.status(400).json({ success: false, message: err.message });
+			console.log(err);
+			return res.status(400).json({ success: false, message: "No se pudo procesar el form" });
+		}
+		return res.json({ success:true, message: "Has podido acceder!", token: token, userData: userData});
+	})(req, res, next);	*/
+}
+
 function validateSignupForm(payload)
 {
 	var isFormValid = true;

@@ -33,12 +33,12 @@ var Schema =
 		nivel: {type: 'string', maxlength: 50, nullable: false},
 		carrera_division: {type: 'string', maxlength: 150, nullable: false},
 		tipo: {type: 'string', maxlength: 50, nullable: false},
-		turno: {type: 'string', maxlength: 50, nullable: false},
+		turno: {type: 'string', maxlength: 50, nullable: false}
 	},
 	conversaciones:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
-		nombre: {type: 'string', maxlength: 150, nullable: false},
+		nombre: {type: 'string', maxlength: 150, nullable: false}
 	},
 	grupo_usuario:
 	{
@@ -86,14 +86,14 @@ var Schema =
 	    fecha: {type: 'dateTime', nullable: false}, 
 	    noticia_id: {type: 'integer', nullable: false, unsigned: true, references: 'noticias.id'}, 
 	    remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}, 
-	    comentario_id: {type: 'integer', nullable: false, unsigned: true}, 
+	    comentario_id: {type: 'integer', nullable: false, unsigned: true}
 	},
 	invitaciones:
 	{
         id: {type:"increments",nullable:false,primary:true},
         user_padre: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
         user_hijo: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id'},
-	    estatus: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id', default:0},
+	    estatus: {type:"integer",nullable:false,unsigned: true, references: 'usuarios.id', defaultTo:0}
 
 	}
 };

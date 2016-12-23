@@ -1,6 +1,6 @@
 var config = require('./app/config/config');
 var Schema = require('./app/config/schema');
-var data = require('./app/config/data');
+var Data = require('./app/config/data');
 var sequence = require('when/sequence');
 var _ = require('lodash');
 var knex = require('knex')(
@@ -95,7 +95,7 @@ function insertData(){
 
   _.map(tableNames, function(tableName) {
     return function () {
-      var rows = [{...}, {...}];
+      //var rows = [{...}, {...}];
       var chunkSize = 30;
       knex.batchInsert('TableName', Data[tableName], chunkSize)
         .returning('id')
@@ -116,6 +116,13 @@ function insertData(){
 createTables()
 .then(function() {
   console.log('Tables created!!');
+  
+}).then(function(){
+
+  insertData();
+  console.log('Insert data completed!!');
+})
+.then(function() {
   process.exit(0);
 })
 .catch(function (error) {

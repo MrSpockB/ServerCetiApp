@@ -29,7 +29,6 @@ module.exports = {
 				});
 				etiquetas.push(temp);
 			});
-			console.log(etiquetas);
 			var gruposPromises = [];
 			etiquetas.forEach(function(param){
 				gruposPromises.push(Grupo.forge(param).fetch());

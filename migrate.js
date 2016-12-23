@@ -59,8 +59,8 @@ function createTable(tableName) {
 function createTables () {
   var tables = [];
   var tableNames = _.keys(Schema);
-  console.log(tableNames);
-  return null;
+  //console.log(tableNames);
+  //return null;
   tables = _.map(tableNames, function (tableName) {
     return function () {
       return createTable(tableName);
@@ -69,10 +69,49 @@ function createTables () {
   return sequence(tables);
 }
 
-/*function insertData(){
+function insertData(){
+  var tableNames = _.keys(Data);
+  //Example
+  // Normalizes for empty keys on multi-row insert:
+  //knex('coords').insert([{x: 20}, {y: 30},  {x: 10, y: 20}])
 
-  return null;
-}*/
+
+  /*
+  knex.select('*')
+  .from('users')
+  .where({name: 'Tim'})
+  .then(function(rows) {
+    return knex.insert({user_id: rows[0].id, name: 'Test'}, 'id').into('accounts');
+  })
+  .then(function(id) {
+    console.log('Inserted Account ' + id);
+  })
+  .catch(function(error) { console.error(error); });
+  */
+
+  
+
+
+
+  _.map(tableNames, function(tableName) {
+    return function () {
+      var rows = [{...}, {...}];
+      var chunkSize = 30;
+      knex.batchInsert('TableName', Data[tableName], chunkSize)
+        .returning('id')
+        .then(function(ids) {  })
+        .catch(function(error) {  });
+
+      knex.transaction(function(tr) {
+        return knex.batchInsert('TableName', rows, chunkSize)
+          .transacting(tr)
+        })
+        .then(function() {  })
+        .catch(function(error) {  });
+    };
+  });
+}
+
 
 createTables()
 .then(function() {

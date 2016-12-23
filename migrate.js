@@ -1,5 +1,6 @@
 var config = require('./app/config/config');
 var Schema = require('./app/config/schema');
+var data = require('./app/config/data');
 var sequence = require('when/sequence');
 var _ = require('lodash');
 var knex = require('knex')(

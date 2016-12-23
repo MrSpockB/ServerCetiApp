@@ -1,20 +1,42 @@
 var data = {
 	roles:
 	{
-
-		id: {},
-		nombre: {}
+		info:[
+			{
+				id: 1,
+				nombre: "Padre"
+			},
+			{
+				id: 1,
+				nombre: "Alumno"
+			},
+			{
+				id: 1,
+				nombre: "Alumno"
+			},
+			{
+				id: 1,
+				nombre: "Alumno"
+			},
+			{
+				id: 1,
+				nombre: "Alumno"
+			},
+		]
 	},
 	usuarios:
 	{
-		id: {},
-		email: {},
-		nombre: {},
-		password: {},
-		rol_id: {},
-		authenticated: {},
-		active: {}
-
+		info: [
+			{
+				id: {},
+				email: {},
+				nombre: {},
+				password: {},
+				rol_id: {},
+				authenticated: {},
+				active: {}
+			}
+		]
 	},
 	noticias:
 	{

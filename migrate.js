@@ -86,7 +86,6 @@ function dropTables(){
   var tableNames = _.keys(Schema);
   sequences = _.map(tableNames, function (tableName) {
     return function () {
-      removeForeignKeyChecks();
       return removeForeignKeyChecks()
           .then(function(){
             return removeForeignKeyChecks();

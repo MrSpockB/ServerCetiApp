@@ -84,19 +84,20 @@ function dropTable(tableName){
 function dropTables(){
   var sequences = [];
   var tableNames = _.keys(Schema);
-  console.log(tableNames);
   sequences = _.map(tableNames, function (tableName) {
-    console .log(tableName);
     return function () {
       removeForeignKeyChecks();
       return removeForeignKeyChecks()
           .then(function(){
+            return removeForeignKeyChecks();
+          })
+          .then(function(){
             return knex.schema.dropTableIfExists(tableName);
           })
           .then(function(info){
+            if(show_details)
             console.log("Table " + tableName + " droped");
           }).catch(function(error){
-            console.log(tableName + " error");
             console.log(error);
           });
     };
@@ -114,6 +115,7 @@ function clearData(){
             return knex(tableName).truncate();
           })
           .then(function(info){
+            if(show_details)
             console.log("table "+ tableName +" cleaned");
           })
           .then(function(){
@@ -133,6 +135,7 @@ function insertData(){
       return knex(tableName)
       .insert(data[tableName])
       .then(function(info){
+        if(show_details)
         console.log(info + " data inserted into " + tableName)
       });
     };
@@ -154,7 +157,7 @@ removeForeignKeyChecks()
     return createTables();
   })
   .then(function() {
-    console.log('Tables created!!');
+    console.log('Tables created');
 
   })
   .then(function(){
@@ -168,7 +171,7 @@ removeForeignKeyChecks()
     return insertData();
   })
   .then(function(){
-          console.log('Data inserted!!');
+          console.log('Data inserted');
           process.exit(0);
   })
   .catch(function (error) {

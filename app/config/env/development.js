@@ -6,7 +6,7 @@ module.exports = {
     host: "127.0.0.1",
     user: "root",
     password: "",
-    database: "cetiApp",
+    database: "cetiapp",
     charser: "utf8",
     jwtSecret: "NodeManagementSystem",
 };

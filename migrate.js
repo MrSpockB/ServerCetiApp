@@ -1,6 +1,6 @@
 var config = require('./app/config/config');
 var Schema = require('./app/config/schema');
-var Data = require('./app/config/data');
+var data = require('./app/config/data');
 var sequence = require('when/sequence');
 var _ = require('lodash');
 var knex = require('knex')(
@@ -16,6 +16,8 @@ var knex = require('knex')(
 	}
 
 });
+
+var show_details = false;
 
 function createTable(tableName) {
   return knex.schema.createTable(tableName, function (table) {
@@ -59,72 +61,124 @@ function createTable(tableName) {
 function createTables () {
   var tables = [];
   var tableNames = _.keys(Schema);
-  //console.log(tableNames);
-  //return null;
   tables = _.map(tableNames, function (tableName) {
     return function () {
+      
       return createTable(tableName);
     };
   });
   return sequence(tables);
 }
 
-function insertData(){
-  var tableNames = _.keys(Data);
-  //Example
-  // Normalizes for empty keys on multi-row insert:
-  //knex('coords').insert([{x: 20}, {y: 30},  {x: 10, y: 20}])
+function removeForeignKeyChecks() {
+  return knex.raw('SET foreign_key_checks = 0;');
+}
 
+function addForeignKeyChecks() {
+  return knex.raw('SET foreign_key_checks = 1;');
+}
 
-  /*
-  knex.select('*')
-  .from('users')
-  .where({name: 'Tim'})
-  .then(function(rows) {
-    return knex.insert({user_id: rows[0].id, name: 'Test'}, 'id').into('accounts');
-  })
-  .then(function(id) {
-    console.log('Inserted Account ' + id);
-  })
-  .catch(function(error) { console.error(error); });
-  */
-
-  
-
-
-
-  _.map(tableNames, function(tableName) {
+function dropTable(tableName){
+  return knex.schema.dropTableIfExists(tableName);
+}
+function dropTables(){
+  var sequences = [];
+  var tableNames = _.keys(Schema);
+  console.log(tableNames);
+  sequences = _.map(tableNames, function (tableName) {
+    console .log(tableName);
     return function () {
-      //var rows = [{...}, {...}];
-      var chunkSize = 30;
-      knex.batchInsert('TableName', Data[tableName], chunkSize)
-        .returning('id')
-        .then(function(ids) {  })
-        .catch(function(error) {  });
-
-      knex.transaction(function(tr) {
-        return knex.batchInsert('TableName', rows, chunkSize)
-          .transacting(tr)
-        })
-        .then(function() {  })
-        .catch(function(error) {  });
+      removeForeignKeyChecks();
+      return removeForeignKeyChecks()
+          .then(function(){
+            return knex.schema.dropTableIfExists(tableName);
+          })
+          .then(function(info){
+            console.log("Table " + tableName + " droped");
+          }).catch(function(error){
+            console.log(tableName + " error");
+            console.log(error);
+          });
     };
   });
+  return sequence(sequences);
+}
+
+function clearData(){
+  var sequences = [];
+  var tableNames = _.keys(data);
+  sequences =_.map(tableNames, function (tableName) {
+      return function(){
+        return removeForeignKeyChecks()
+          .then(function(){
+            return knex(tableName).truncate();
+          })
+          .then(function(info){
+            console.log("table "+ tableName +" cleaned");
+          })
+          .then(function(){
+            return addForeignKeyChecks();
+          });
+      };
+      
+  });
+  return sequence(sequences);
+}
+
+function insertData(){
+  var tableNames = _.keys(data);
+  var finalData = [];
+  finalData =_.map(tableNames, function (tableName) {
+    return function () {
+      return knex(tableName)
+      .insert(data[tableName])
+      .then(function(info){
+        console.log(info + " data inserted into " + tableName)
+      });
+    };
+  });
+  return sequence(finalData);
 }
 
 
-createTables()
-.then(function() {
-  console.log('Tables created!!');
-  
-}).then(function(){
 
-  insertData();
-  console.log('Insert data completed!!');
-})
-.then(function() {
-  process.exit(0);
+
+
+removeForeignKeyChecks()
+.then(function(){
+  dropTables()
+  .then(function(){
+    console.log("Tables Droped");
+  })
+  .then(function(){ 
+    return createTables();
+  })
+  .then(function() {
+    console.log('Tables created!!');
+
+  })
+  .then(function(){
+      return clearData();
+  })
+  .then(function(){
+      console.log("Data cleaned");
+      addForeignKeyChecks();
+  })
+  .then(function() {
+    return insertData();
+  })
+  .then(function(){
+          console.log('Data inserted!!');
+          process.exit(0);
+  })
+  .catch(function (error) {
+    console.error(error); 
+    throw error;
+  });
+  
 })
 .catch(function (error) {
+  console.error(error); 
   throw error;
 });
+

@@ -82,6 +82,39 @@ module.exports = {
 			.catch(function(err){
 				res.json(err);
 			})
+		},
+		delete: function(req, res, next)
+		{
+			Noticia.forge({ id: req.params.noticiaID })
+			.fetch({
+				withRelated: ['grupos']
+			})
+			.then(function(noticia){
+				noticia.grupos().detach()
+				.then(function(){
+					noticia.destroy()
+					.then(function(){
+						res.json({ success: true, msg: 'Noticia correctamente eliminada'})
+					})
+				})
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
+	},
+	"usuario/:usuarioID":
+	{
+		get: function(req, res, next)
+		{
+			Noticia.forge().where({ usuario_id: req.params.usuarioID })
+			.fetchAll()
+			.then(function(noticias){
+				return res.json(noticias);
+			})
+			.catch(function(err){
+				return res.json(err);
+			});
 		}
 	}
 };

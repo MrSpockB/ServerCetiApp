@@ -58,6 +58,8 @@ function createTable(tableName) {
 function createTables () {
   var tables = [];
   var tableNames = _.keys(Schema);
+  console.log(tableNames);
+  return null;
   tables = _.map(tableNames, function (tableName) {
     return function () {
       return createTable(tableName);
@@ -65,6 +67,11 @@ function createTables () {
   });
   return sequence(tables);
 }
+
+/*function insertData(){
+
+  return null;
+}*/
 
 createTables()
 .then(function() {

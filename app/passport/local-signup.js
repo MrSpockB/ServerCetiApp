@@ -12,6 +12,10 @@ module.exports = function(config)
 	}, 
 	function(req, email, password, done)
 	{
+
+		
+	    var code =  ("0000" + (Math.random()*Math.pow(36,4) << 0).toString(36)).slice(-4);
+	
 		var userData = 
 		{
 			email: email.trim(),
@@ -19,6 +23,8 @@ module.exports = function(config)
 			nombre: req.body.nombre.trim(),
 			rol_id: req.body.rol_id
 		};
+		//,
+		//	authentication_code: code
 		new User(userData)
 			.save()
 			.then(function(user)
@@ -32,4 +38,5 @@ module.exports = function(config)
 			});
 		
 	});
+
 };

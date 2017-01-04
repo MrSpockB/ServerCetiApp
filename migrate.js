@@ -111,14 +111,17 @@ function clearData(){
       return function(){
         return removeForeignKeyChecks()
           .then(function(){
+            return removeForeignKeyChecks();
+          })
+          .then(function(){
             return knex(tableName).truncate();
           })
           .then(function(info){
             if(show_details)
             console.log("table "+ tableName +" cleaned");
           })
-          .then(function(){
-            return addForeignKeyChecks();
+          .catch(function(error){
+            console.log(error);
           });
       };
       
@@ -148,9 +151,18 @@ function insertData(){
 
 removeForeignKeyChecks()
 .then(function(){
-  dropTables()
+
+  clearData()
   .then(function(){
-    console.log("Tables Droped");
+    console.log("Data cleaned");
+    
+  })
+  .then(function(){
+      return dropTables();
+  })
+  .then(function(){
+      console.log("Tables Droped");
+      addForeignKeyChecks();
   })
   .then(function(){ 
     return createTables();
@@ -158,13 +170,6 @@ removeForeignKeyChecks()
   .then(function() {
     console.log('Tables created');
 
-  })
-  .then(function(){
-      return clearData();
-  })
-  .then(function(){
-      console.log("Data cleaned");
-      addForeignKeyChecks();
   })
   .then(function() {
     return insertData();

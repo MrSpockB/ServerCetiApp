@@ -13,8 +13,8 @@ var Schema =
 		password: {type: 'string', nullable: false},
 		rol_id: {type: 'integer', nullable: false, unsigned: true, references: 'roles.id'},
 		authenticated: {type: 'string', maxlength: 20, nullable: false, defaultTo:'pending'},
+		authentication_code: {type:'string', maxlength:4, nullable:true, defaultTo: null},
 		active: {type: 'integer', nullable: false, defaultTo: 1}
-
 	},
 	noticias:
 	{

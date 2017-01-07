@@ -83,6 +83,21 @@ module.exports = {
 				res.json(err);
 			})
 		},
+		put: function(req, res, next)
+		{
+			Noticia.forge({ id: req.params.noticiaID })
+			.save({
+				titulo: req.body.titulo,
+				texto: req.body.texto,
+				imagenSrc: req.body.imagenSrc
+			}, {patch: true})
+			.then(function(noticia){
+				res.json(noticia);
+			})
+			.catch(function(err){
+				res.json(err);
+			})
+		},
 		delete: function(req, res, next)
 		{
 			Noticia.forge({ id: req.params.noticiaID })

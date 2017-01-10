@@ -82,6 +82,77 @@ module.exports = {
 				res.json(err);
 			})
 		},
+		put: function(req, res, next)
+		{
+			var etiquetasTemp = req.body.etiquetas;
+			var etiquetas = [];
+			etiquetasTemp.forEach(function(etiqueta)
+			{
+				var temp = {};
+				Object.keys(etiqueta).forEach(function(param)
+				{
+					if(etiqueta[param] != "General")
+					{
+						temp[param] = etiqueta[param];
+					}
+				});
+				etiquetas.push(temp);
+			});
+			var gruposPromises = [];
+			etiquetas.forEach(function(param){
+				gruposPromises.push(Grupo.forge().where(param).fetchAll());
+			});
+			Promise.all(gruposPromises).then(function(grupoCollec)
+			{
+				var ids = [];
+				grupoCollec.forEach(function(grupos)
+				{
+					grupos.forEach(function(grupo)
+					{
+						ids.push(grupo.get('id'));
+					});
+				});
+				new Noticia({ id: req.params.noticiaID })
+				.fetch({
+					withRelated: ['grupos']
+				})
+				.then(function(noticia)
+				{
+					noticia.save({
+						titulo: req.body.titulo,
+						texto: req.body.texto,
+						imagenSrc: req.body.imagenSrc
+					}, {patch: true})
+					.then(function(noticia)
+					{
+						noticia.grupos().detach()
+						.then(function()
+						{
+							noticia.grupos().attach(ids)
+							.then(function(noticia)
+							{
+								res.json({ success: true, message: "Noticia correctamente actualizada"});
+							})
+						})
+						.catch(function(err)
+						{
+							console.log("err: "+err);
+							res.json({success: false, message: "Hubo un problema al actualizar la noticia"});
+						});
+					})
+					.catch(function(err)
+					{
+						console.log("err: "+err)
+						res.json({success: false, message: "Hubo un problema al actualizar la noticia"});
+					});
+				})
+				.catch(function(err){
+					console.log("err: "+err)
+					res.json({success: false, message: "Hubo un problema al actualizar la noticia"});
+				})
+				
+			});
+		},
 		delete: function(req, res, next)
 		{
 			Noticia.forge({ id: req.params.noticiaID })

@@ -85,9 +85,15 @@ var Schema =
 	    texto: {type: 'string', maxlength: 250, nullable: false}, 
 	    fecha: {type: 'dateTime', nullable: false}, 
 	    noticia_id: {type: 'integer', nullable: false, unsigned: true, references: 'noticias.id'}, 
-	    remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}, 
-	    comentario_id: {type: 'integer', nullable: false, unsigned: true}
+	    remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},
+    respuestas_comentario: {
+        id: {type: 'increments', nullable: false, primary: true},
+        texto: {type: 'string', maxlength: 250, nullable: false},
+        fecha: {type: 'dateTime', nullable: false},
+        remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'},
+        comentario_id: {type: 'integer', nullable: false, unsigned: true, references:'comentarios.id'},
+    },
 	invitaciones:
 	{
         id: {type:"increments",nullable:false,primary:true},

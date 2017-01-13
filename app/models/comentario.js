@@ -6,6 +6,9 @@ var Comentario = bookshelf.Model.extend({
 	{
 		return this.belongsTo('Usuario', 'remitente_id');
 	},
+	respuestas: function () {
+        return this.hasMany('Respuesta', 'comentario_id');
+    }
 });
 
 module.exports = bookshelf.model('Comentario', Comentario);

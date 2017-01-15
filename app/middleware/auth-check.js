@@ -26,7 +26,8 @@ var jwt = require('jsonwebtoken'),
 						return res.status(401).end();
 					}
 					res.userID = user.id;
-					return next();
+					next();
+					return null;
 				})
 				.catch(function(err){
 					return res.status(401).end();

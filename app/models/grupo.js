@@ -3,6 +3,7 @@ var bookshelf = require('./../config/bookshelf');
 require('./user');
 require('./noticia');
 require('./conversacion');
+require('./materia');
 var Grupo = bookshelf.Model.extend({
 	tableName: 'grupos',
 	usuarios: function()
@@ -16,6 +17,10 @@ var Grupo = bookshelf.Model.extend({
 	conversaciones: function()
 	{
 		return this.hasMany('Conversacion', 'grupo_id');
+	},
+	materias: function()
+	{
+		return this.belongsToMany('Materia', 'grupo_materia', 'grupo_id', 'materia_id');
 	}
 });
 

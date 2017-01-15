@@ -6,6 +6,10 @@ var Mensaje = bookshelf.Model.extend({
 	conversacion: function()
 	{
 		return this.belongsTo('Conversacion', 'conversacion_id');
+	},
+	remitente: function()
+	{
+		return this.belongsTo('Usuario', 'remitente_id');
 	}
 });
 

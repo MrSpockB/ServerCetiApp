@@ -49,7 +49,7 @@ module.exports = {
 			new Conversacion({id: req.params.conversacionID})
 			.fetch({
 				withRelated: [
-					'mensajes'
+					'mensajes.remitente'
 				]
 			})
 			.then(function(conversacion){

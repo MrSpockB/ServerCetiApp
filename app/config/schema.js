@@ -58,7 +58,7 @@ var Schema =
 		conversacion_id: {type: 'integer', nullable: false, unsigned: true, references: 'conversaciones.id'},
 		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},
-	mensaje:
+	mensajes:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
 		texto: {type: 'string', maxlength: 250, nullable: false},
@@ -66,7 +66,7 @@ var Schema =
 		conversacion_id: {type: 'integer', nullable: false, unsigned: true, references: 'conversaciones.id'},
 		remitente_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},
-	materia:
+	materias:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
 		codigo: {type: 'string', maxlength: 250, nullable: false},

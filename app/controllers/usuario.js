@@ -216,5 +216,31 @@ module.exports = {
 				res.json(err);
 			});
 		}
+	},
+	"materias":
+	{
+		get: function(req, res, next)
+		{
+			var materias = [];
+			new Usuario({id: res.userID})
+			.fetch({withRelated: ['grupos.materias.profesor']})
+			.then(function(usuario)
+			{
+				var grupos = usuario.related('grupos');
+				grupos.forEach(function(grupo){
+					var tempMaterias = grupo.related('materias').toJSON();
+					tempMaterias = tempMaterias.map(function(materia)
+					{
+						materia['grupo'] = grupo.get('semestre') + grupo.get('nombre');
+						return materia;
+					});
+					materias = materias.concat(tempMaterias);
+				})
+				res.json(materias);
+			})
+			.catch(function(err){
+				res.json(err);
+			});
+		}
 	}
 };

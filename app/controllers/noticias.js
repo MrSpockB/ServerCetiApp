@@ -38,10 +38,8 @@ module.exports = {
 				var ids = [];
 				grupoCollec.forEach(function(grupos)
 				{
-					//console.log(grupos);
 					grupos.forEach(function(grupo)
 					{
-						console.log(grupo.get('id'));
 						ids.push(grupo.get('id'));
 					});
 				});
@@ -55,7 +53,6 @@ module.exports = {
 				.save()
 				.then(function(noticia)
 				{
-					console.log("saved");
 					noticia.grupos().attach(ids).then(function(promRes)
 					{
 						return res.json({message: "Noticia subida correctamente"});

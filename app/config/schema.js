@@ -28,6 +28,7 @@ var Schema =
 	grupos:
 	{
 		id: {type: 'increments', nullable: false, primary: true},
+		descripcion: {type: 'string', maxlength: 150, nullable: false},
 		nombre: {type: 'string', maxlength: 150, nullable: false},
 		semestre: {type: 'integer', nullable: false, unsigned: true},
 		nivel: {type: 'string', maxlength: 50, nullable: false},
@@ -71,7 +72,8 @@ var Schema =
 		id: {type: 'increments', nullable: false, primary: true},
 		codigo: {type: 'string', maxlength: 250, nullable: false},
 		nombre: {type: 'string', maxlength: 250, nullable: false},
-		nivel: {type: 'string', maxlength: 250, nullable: false}
+		nivel: {type: 'string', maxlength: 250, nullable: false},
+		maestro_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},
 	grupo_materia:
 	{

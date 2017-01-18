@@ -108,7 +108,8 @@ var data = {
 		grupos:
 		[{
 			"id":"1",
-			"nombre":"8M IDESI",
+			"nombre": "M",
+			"descripcion":"8M IDESI",
 			"semestre":"8",
 			"nivel":"Ingenieria",
 			"carrera_division":"Desarrollo de Software",
@@ -117,7 +118,8 @@ var data = {
 		}, 
 		{
 			"id":"2",
-			"nombre":"Docentes Ing. Ciencias B\u00e1sicas",
+			"nombre": "",
+			"descripcion":"Docentes Ing. Ciencias B\u00e1sicas",
 			"semestre":"0",
 			"nivel":"Ingenieria",
 			"carrera_division":"Ciencias Basicas",
@@ -126,7 +128,8 @@ var data = {
 		}, 
 		{
 			"id":"3",
-			"nombre":"Docentes Tec. Informatica",
+			"nombre": "",
+			"descripcion":"Docentes Tec. Informatica",
 			"semestre":"0",
 			"nivel":"Tecnologo",
 			"carrera_division":"Informatica",
@@ -135,7 +138,8 @@ var data = {
 		}, 
 		{
 			"id":"4",
-			"nombre":"6C Tec. Informatica",
+			"nombre": "C",
+			"descripcion":"6C Tec. Informatica",
 			"semestre":"6",
 			"nivel":"Tecnologo",
 			"carrera_division":"Informatica",
@@ -144,7 +148,8 @@ var data = {
 		}, 
 		{
 			"id":"5",
-			"nombre":"6A Ingenieria Mecatronica",
+			"nombre": "A",
+			"descripcion":"6A Ingenieria Mecatronica",
 			"semestre":"6",
 			"nivel":"Ingenieria",
 			"carrera_division":"Mecatronica",
@@ -153,7 +158,8 @@ var data = {
 		}, 
 		{
 			"id":"6",
-			"nombre":"6B Ingenieria Mecatronica",
+			"nombre": "B",
+			"descripcion":"6B Ingenieria Mecatronica",
 			"semestre":"6",
 			"nivel":"Ingenieria",
 			"carrera_division":"Mecatronica",
@@ -162,7 +168,8 @@ var data = {
 		}, 
 		{
 			"id":"7",
-			"nombre":"Docentes Mecatronica Matutino",
+			"nombre": "",
+			"descripcion":"Docentes Mecatronica Matutino",
 			"semestre":"0",
 			"nivel":"Ingenieria",
 			"carrera_division":"Mecatronica",
@@ -171,7 +178,8 @@ var data = {
 		}, 
 		{
 			"id":"8",
-			"nombre":"Docentes Mecatronica Vespertino",
+			"nombre": "",
+			"descripcion":"Docentes Mecatronica Vespertino",
 			"semestre":"0",
 			"nivel":"Ingenieria",
 			"carrera_division":"Mecatronica",
@@ -349,19 +357,22 @@ var data = {
 			"id":"1",
 			"codigo":"ING001",
 			"nombre":"Tecnolog\u00edas Emergentes",
-			"nivel":"Ingenieria"
+			"nivel":"Ingenieria",
+			"maestro_id": "5"
 		}, 
 		{
 			"id":"2",
 			"codigo":"ING002",
 			"nombre":"Proyecto II",
-			"nivel":"Ingenieria"
+			"nivel":"Ingenieria",
+			"maestro_id": "6"
 		}, 
 		{
 			"id":"3",
 			"codigo":"ING003",
 			"nombre":"Redes LAN Y WAN",
-			"nivel":"Ingenieria"
+			"nivel":"Ingenieria",
+			"maestro_id": "7"
 		}],
 		grupo_materia:
 		[{

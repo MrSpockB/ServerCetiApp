@@ -2,10 +2,14 @@ var bookshelf = require('./../config/bookshelf');
 require('./conversacion');
 
 var Mensaje = bookshelf.Model.extend({
-	tableName: 'mensaje',
+	tableName: 'mensajes',
 	conversacion: function()
 	{
 		return this.belongsTo('Conversacion', 'conversacion_id');
+	},
+	remitente: function()
+	{
+		return this.belongsTo('Usuario', 'remitente_id');
 	}
 });
 

@@ -294,7 +294,7 @@ var data = {
 			"conversacion_id":"3",
 			"usuario_id":"4"
 		}],
-		mensaje:
+		mensajes:
 		[{	
 			"id":"1",
 			"texto":"Primer Mensaje Tecnolog\u00edas Emergentes",
@@ -344,7 +344,7 @@ var data = {
 			"conversacion_id":"2",
 			"remitente_id":"1"
 		}],
-		materia:
+		materias:
 		[{
 			"id":"1",
 			"codigo":"ING001",

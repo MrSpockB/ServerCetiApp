@@ -78,6 +78,7 @@ var data = {
 			"titulo":"1ª Convocatoria 2017 del Programa Prepa en Línea-SEP",
 			"texto":"La Prepa en línea - SEP es un proyecto innovador y gratuito en el que podrás estudiar desde el lugar en el que te encuentres, a la hora que tú decidas. Se imparte a nivel nacional y con validez oficial. Además, te permite estudiar con una enorme flexibilidad, ya que decidirás el lugar y la hora para entrar a nuestra aula virtual.",
 			"fecha":"2016-12-08 09:29:22",
+			"fechaCaducidad": "NULL",
 			"imagenSrc": "http://www.ceti.mx/images/noticias/24203-prepa-en-linea.jpg",
 			"usuario_id":"5"
 		}, 
@@ -86,6 +87,7 @@ var data = {
 			"titulo":"Toma de Protesta CETI Colomos",
 			"texto":"¡Egresados (as) de nivel Tecnólogo y de Ingeniería recibieron entusiasmados su Título profesional!\n\n  Luego de un proceso laborioso en sus proyectos, prototipos y algunos mediante la presentación de un reporte de experiencia profesional lograron recibir su título como Tecnólogos profesionales e Ingenieros.",
 			"fecha":"2016-12-07 10:24:23",
+			"fechaCaducidad": "NULL",
 			"imagenSrc":"http://www.ceti.mx/images/noticias/20472-titulaciones.jpg",
 			"usuario_id":"5"
 		}, 
@@ -94,6 +96,7 @@ var data = {
 			"titulo":"XXIII Olimpiada Regional de Química",			
 			"texto":"¡Excelentes resultados obtuvieron estudiantes de nivel Tecnólogo!\n Estudiantes de nivel Tecnólogo de plantel Colomos sobresalieron en la XXIII Olimpiada Regional de Química.\n El evento organizado por la Secretaría de Educación Jalisco, la Academia Mexicana de Ciencias,  la Asociación Mexicana de Química Analítica, y  CECyTE como sede se realizó el pasado 23 de septiembre.",
 			"fecha":"2016-11-22 19:28:55",
+			"fechaCaducidad": "NULL",
 			"imagenSrc":"http://www.ceti.mx/images/noticias/09416-olimpiada-quimica.jpg",
 			"usuario_id":"7"
 		}, 
@@ -102,6 +105,16 @@ var data = {
 			"titulo":"Corea presente en el CETI",
 			"texto":"Seminario: Situación Política y Social de la Península Coreana.\n El Centro de Enseñanza Técnica Industrial y la Embajada de la República de Corea en México será sede del Seminario: Situación Política y Social de la Península de Coreana Sistema Educativo y Becas.\n Se llevará a cabo los días 5 y 6 de diciembre en las Instalaciones de CETI Plantel Colomos y el Hotel Fiesta Americana Guadalajara.",
 			"fecha":"2016-12-01 19:28:55",
+			"fechaCaducidad": "NULL",
+			"imagenSrc":"http://www.ceti.mx/images/noticias/05421-seminario-corea.jpg",
+			"usuario_id":"7"
+		}, 
+		{
+			"id":"5",
+			"titulo":"Noticia caducada",
+			"texto":"Noticia caducada1, Noticia caducada1, Noticia caducada1",
+			"fecha":"2016-12-01 19:28:55",
+			"fechaCaducidad":"2016-01-01 19:28:55",
 			"imagenSrc":"http://www.ceti.mx/images/noticias/05421-seminario-corea.jpg",
 			"usuario_id":"7"
 		}],
@@ -206,6 +219,11 @@ var data = {
 			"id":"4",
 			"grupo_id":"1",
 			"usuario_id":"4"
+		}, 
+		{
+			"id":"5",
+			"grupo_id":"1",
+			"usuario_id":"5"
 		}],
 		grupo_noticia:
 		[{

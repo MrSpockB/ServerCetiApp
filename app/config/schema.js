@@ -22,6 +22,7 @@ var Schema =
 		titulo: {type: 'string', maxlength: 150, nullable: false},
 		texto: {type: 'string', maxlength: 250, nullable: false},
 		fecha: {type: 'dateTime', nullable: false},
+		fechaCaducidad: { type: 'dateTime', nullable: true},
 		imagenSrc: {type: 'string', maxlength: 250, nullable: true},
 		usuario_id: {type: 'integer', nullable: false, unsigned: true, references: 'usuarios.id'}
 	},

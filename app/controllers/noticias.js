@@ -43,10 +43,16 @@ module.exports = {
 						ids.push(grupo.get('id'));
 					});
 				});
+				var expDate = null;
+				if(req.body.expDate)
+				{
+					expDate = req.body.expDate;
+				}
 				new Noticia({
 					titulo: req.body.titulo,
 					texto: req.body.texto,
 					fecha: req.body.fecha,
+					fechaCaducidad: expDate,
 					imagenSrc: req.body.imagenSrc,
 					usuario_id: res.userID
 				})

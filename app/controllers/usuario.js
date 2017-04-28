@@ -68,8 +68,6 @@ module.exports = {
 			    html: '<b>Hello world ?</b>' // html body
 			};
 
-
-
 			// send mail with defined transport object
 			/*smtpTransport.sendMail(mailOptions, function(error, response) {
 			  if (error) {
@@ -216,5 +214,36 @@ module.exports = {
 				res.json(err);
 			});
 		}
-	}
+	},
+
+   /*Christian Cardenas 31/03/2017--> Este método se encarga de obtener los datos del usuario, a través
+   del email o id proporcionado en la URL (:email/:id)*/
+	"usuarioEmail/:email/:id":
+	{
+		get: function(req, res, next){
+			console.log(req.params.email);
+			 Usuario.query('where','email','=',req.params.email)
+			 .fetch().then(function(usuario){
+	 			res.json(usuario);
+	 		}).catch(function(err){
+	 			res.json(err);
+			})
+	 	}
+	},
+	/*Christian Cardenas 31/03/2017--> Este método se encarga de actualizar el estatus del usuario,
+	De No Autentificado / Autentificado, recibe como parametro el id del usuario (id) a actualizar*/
+	"actualizarEstatus/:id":
+	{
+	get: function(req, res, next)
+		{
+		        Usuario.query('where', 'id', '=', req.params.id)
+		        .save({authenticated: 'authenticated'},{patch:true})
+				.then(function(usuario){
+					res.json(usuario);
+				}).catch(function(err){
+					res.json(err);
+				});
+		
+	    }
+	}	
 };

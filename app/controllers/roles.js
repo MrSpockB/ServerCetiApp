@@ -1,5 +1,6 @@
 var Rol = require('./../models/rol');
-
+/*Christian Cardenas Alvarez  31/03/2017-->Este controlador está diseñado para administrar los roles que 
+  se tienen  dentro de la aplicación  (estudiante, profesor, padre de familia)*/
 module.exports = {
 	index: 
 	{
@@ -24,7 +25,8 @@ module.exports = {
 				});
 		}
     },
-
+    /*Este metodo se encarga de obtener la información (nombre, correo, id,etc) del usuario acorde al rol
+    que tiene dentro de la  aplicación*/
     "rolesId/:id":
 	{
 		get: function(req, res, next){
